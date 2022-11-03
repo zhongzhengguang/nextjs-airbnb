@@ -8,6 +8,7 @@ function Banner() {
         src="https://links.papareact.com/0fm"
         layout="fill"
         objectFit="cover"
+        alt="#"
       />
       <div className="absolute w-full text-center top-1/2">
         <p className=" text-sm sm:text-lg">Not sure where to go ? Perfect . </p>
