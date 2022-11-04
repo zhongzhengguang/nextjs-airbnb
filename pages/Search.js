@@ -2,16 +2,12 @@ import React from "react";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import { useRouter } from "next/router";
-import { format } from "date-fns";
-function Search({ searchResults }) {
-  console.log(searchResults);
+import InfoCard from "./Components/InfoCard";
+function search({ searchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, numberOfGuests } = router.query;
-
-  const formattedStartDate = format(new Date(startDate), "dd MMMM yyyy");
-  const formattedEndtDate = format(new Date(endDate), "dd MMMM yyyy");
-  const range = `${formattedStartDate} - ${formattedEndtDate}`;
-
+  const range = `${startDate} - ${endDate}`;
+  // console.log(searchResults);
   return (
     <div>
       <Header
@@ -30,18 +26,35 @@ function Search({ searchResults }) {
             <p className="button">Rooms of Beds</p>
             <p className="button">More filter</p>
           </div>
+          <div className=" flex flex-col">
+            {searchResults.map(
+              ({ img, location, title, description, star, price, total }) => (
+                <InfoCard
+                  key={img}
+                  img={img}
+                  location={location}
+                  title={title}
+                  description={description}
+                  star={star}
+                  price={price}
+                  total={total}
+                />
+              )
+            )}
+          </div>
         </section>
       </main>
       <Footer />
     </div>
   );
 }
+export default search;
 
-export default Search;
-export async function getSeverSideProps() {
-  const searchResults = await fetch("https://links.papareact.com/isz").then(
+export async function getStaticProps() {
+  const searchResults = await fetch("https://www.jsonkeeper.com/b/5NPS").then(
     (res) => res.json()
   );
+
   return {
     props: {
       searchResults,

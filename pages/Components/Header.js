@@ -11,6 +11,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
+import format from "date-fns/format";
 function Header({ placeholder }) {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -28,11 +29,11 @@ function Header({ placeholder }) {
 
   const search = () => {
     router.push({
-      pathname: "./Search",
+      pathname: "/search",
       query: {
         location: searchInput,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
+        startDate: format(new Date(startDate.toISOString()), "dd MMMM yy"),
+        endDate: format(new Date(endDate.toISOString()), "dd MMMM yyyy"),
         numberOfGuests,
       },
     });
@@ -53,7 +54,7 @@ function Header({ placeholder }) {
         <Image
           alt="#"
           src="https://links.papareact.com/qd3"
-          layout="fill"
+          fill
           objectFit="contain"
           objectPosition="left"
         />
@@ -63,7 +64,7 @@ function Header({ placeholder }) {
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
           type="text"
-          placeholder={placeholder || "Search"}
+          placeholder={placeholder || "search"}
           className="pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400"
         />
         <MagnifyingGlassIcon className=" h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer hidden md:inline-flex md:mx-2" />
@@ -102,7 +103,7 @@ function Header({ placeholder }) {
               Cancel
             </button>
             <button className=" flex-grow text-red-500" onClick={search}>
-              Search
+              search
             </button>
           </div>
         </div>

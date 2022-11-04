@@ -8,7 +8,7 @@ function LargeCard({ img, description, title, buttonText }) {
         <Image
           alt="#"
           src={img}
-          layout="fill"
+          fill
           objectFit="cover"
           className=" rounded-2xl hover:scale-105 transition duration-300"
         />
