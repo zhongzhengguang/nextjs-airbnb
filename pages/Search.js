@@ -3,7 +3,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import { useRouter } from "next/router";
 import InfoCard from "./Components/InfoCard";
-function search({ searchResults }) {
+function Search({ searchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, numberOfGuests } = router.query;
   const range = `${startDate} - ${endDate}`;
@@ -48,7 +48,7 @@ function search({ searchResults }) {
     </div>
   );
 }
-export default search;
+export default Search;
 
 export async function getStaticProps() {
   const searchResults = await fetch("https://www.jsonkeeper.com/b/5NPS").then(
